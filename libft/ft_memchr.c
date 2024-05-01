@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuffard <mjuffard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/14 06:16:38 by mjuffard          #+#    #+#             */
-/*   Updated: 2024/01/14 23:26:01 by mjuffard         ###   ########lyon.fr   */
+/*   Created: 2023/11/07 22:16:39 by mjuffard          #+#    #+#             */
+/*   Updated: 2023/11/14 22:55:13 by mjuffard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	t_stack	*a;
-	t_stack	*b;
+	size_t	i;
 
-	a = create_stack(argv, argc - 1);
-	b = NULL;
-	if (!a)
+	if (!n)
+		return (NULL);
+	i = 0;
+	while (((unsigned char *)s)[i] != ((unsigned char)c) && i < n - 1)
+		i++;
+	if (((unsigned char *)s)[i] == ((unsigned char)c))
+		return ((&((unsigned char *)s)[i]));
+	else
 		return (0);
-	final_index(a);
-	if (!check_double(a))
-		clean_exit(a, b, 1);
-	if (!check_order(a))
-	{
-		korean_presort(&a, &b);
-		sort_3_left(&a);
-		sort_stack(&a, &b);
-	}
-	clean_exit(a, b, 0);
 }

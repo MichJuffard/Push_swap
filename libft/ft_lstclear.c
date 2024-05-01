@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuffard <mjuffard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/14 06:16:38 by mjuffard          #+#    #+#             */
-/*   Updated: 2024/01/14 23:26:01 by mjuffard         ###   ########lyon.fr   */
+/*   Created: 2023/11/14 18:36:09 by mjuffard          #+#    #+#             */
+/*   Updated: 2023/11/14 19:05:32 by mjuffard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_stack	*a;
-	t_stack	*b;
+	t_list	*temp;
 
-	a = create_stack(argv, argc - 1);
-	b = NULL;
-	if (!a)
-		return (0);
-	final_index(a);
-	if (!check_double(a))
-		clean_exit(a, b, 1);
-	if (!check_order(a))
+	if (!lst || !del)
+		return ;
+	while (*lst)
 	{
-		korean_presort(&a, &b);
-		sort_3_left(&a);
-		sort_stack(&a, &b);
+		temp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = temp;
 	}
-	clean_exit(a, b, 0);
 }

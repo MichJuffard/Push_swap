@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuffard <mjuffard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/14 06:16:38 by mjuffard          #+#    #+#             */
-/*   Updated: 2024/01/14 23:26:01 by mjuffard         ###   ########lyon.fr   */
+/*   Created: 2023/11/08 16:17:01 by mjuffard          #+#    #+#             */
+/*   Updated: 2023/11/14 23:58:52 by mjuffard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	t_stack	*a;
-	t_stack	*b;
+	void	*ret;
 
-	a = create_stack(argv, argc - 1);
-	b = NULL;
-	if (!a)
-		return (0);
-	final_index(a);
-	if (!check_double(a))
-		clean_exit(a, b, 1);
-	if (!check_order(a))
-	{
-		korean_presort(&a, &b);
-		sort_3_left(&a);
-		sort_stack(&a, &b);
-	}
-	clean_exit(a, b, 0);
+	if (!size || !nmemb)
+		return (malloc(0));
+	if (INT_MAX / size < nmemb)
+		return (NULL);
+	ret = malloc(nmemb * size);
+	if (!ret)
+		return (NULL);
+	ft_bzero(ret, size * nmemb);
+	return (ret);
 }

@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuffard <mjuffard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/14 06:16:38 by mjuffard          #+#    #+#             */
-/*   Updated: 2024/01/14 23:26:01 by mjuffard         ###   ########lyon.fr   */
+/*   Created: 2023/11/27 23:24:01 by mjuffard          #+#    #+#             */
+/*   Updated: 2023/12/04 17:45:04 by mjuffard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "push_swap.h"
+#include "ft_printf.h"
 
-int	main(int argc, char **argv)
+int	ft_putnbr(int n, int *count)
 {
-	t_stack	*a;
-	t_stack	*b;
+	char		temp;
 
-	a = create_stack(argv, argc - 1);
-	b = NULL;
-	if (!a)
-		return (0);
-	final_index(a);
-	if (!check_double(a))
-		clean_exit(a, b, 1);
-	if (!check_order(a))
+	if (n == INT_MIN)
+		return (write(1, "-2147483648", 11));
+	if (n < 0)
 	{
-		korean_presort(&a, &b);
-		sort_3_left(&a);
-		sort_stack(&a, &b);
+		if (write(1, "-", 1) == -1)
+			return (-1);
+		(*count)++;
+		n = -n;
 	}
-	clean_exit(a, b, 0);
+	temp = n % 10 + '0';
+	if (n >= 10)
+	{
+		n = n / 10;
+		ft_putnbr(n, count);
+	}
+	(*count)++;
+	if (write(1, &temp, 1) == -1)
+		return (-1);
+	return (*count);
 }

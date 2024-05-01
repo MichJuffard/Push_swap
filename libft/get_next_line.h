@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuffard <mjuffard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/14 06:16:38 by mjuffard          #+#    #+#             */
-/*   Updated: 2024/01/14 23:26:01 by mjuffard         ###   ########lyon.fr   */
+/*   Created: 2023/11/30 15:15:22 by mjuffard          #+#    #+#             */
+/*   Updated: 2024/01/09 14:14:52 by mjuffard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "push_swap.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# include <stdlib.h>
+# include <unistd.h>
 
-int	main(int argc, char **argv)
-{
-	t_stack	*a;
-	t_stack	*b;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+# define FD_MAX 1024
 
-	a = create_stack(argv, argc - 1);
-	b = NULL;
-	if (!a)
-		return (0);
-	final_index(a);
-	if (!check_double(a))
-		clean_exit(a, b, 1);
-	if (!check_order(a))
-	{
-		korean_presort(&a, &b);
-		sort_3_left(&a);
-		sort_stack(&a, &b);
-	}
-	clean_exit(a, b, 0);
-}
+size_t	ft_nxtln(char *str);
+char	*ft_clean(char *str1, char *str2);
+void	ft_memmove_gnl(char *rest, size_t n);
+char	*get_next_line(int fd);
+char	*ft_strnjoin(char *str1, char *str2, size_t n);
+
+#endif

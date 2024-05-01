@@ -6,11 +6,10 @@
 /*   By: mjuffard <mjuffard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 07:35:54 by mjuffard          #+#    #+#             */
-/*   Updated: 2024/05/01 05:22:19 by mjuffard         ###   ########lyon.fr   */
+/*   Updated: 2024/01/15 03:35:44 by mjuffard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 #include "checker.h"
 #include "errno.h"
@@ -73,11 +72,6 @@ int	main(int argc, char **argv)
 	if (argc <= 1)
 		return (0);
 	a = create_stack(argv, argc - 1);
-	if (!a)
-	{
-		write(2, "Fail to create stack\n", 21);
-		clean_exit(a, b, 1);
-	}
 	final_index(a);
 	if (!a || !check_double(a))
 		clean_exit(a, b, 1);

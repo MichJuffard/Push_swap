@@ -1,35 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuffard <mjuffard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/14 06:16:38 by mjuffard          #+#    #+#             */
-/*   Updated: 2024/01/14 23:26:01 by mjuffard         ###   ########lyon.fr   */
+/*   Created: 2023/11/08 17:18:35 by mjuffard          #+#    #+#             */
+/*   Updated: 2023/11/09 18:33:26 by mjuffard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "push_swap.h"
 
-int	main(int argc, char **argv)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	t_stack	*a;
-	t_stack	*b;
+	char	*ret;
+	size_t	i;
 
-	a = create_stack(argv, argc - 1);
-	b = NULL;
-	if (!a)
+	if (!s)
 		return (0);
-	final_index(a);
-	if (!check_double(a))
-		clean_exit(a, b, 1);
-	if (!check_order(a))
+	i = 0;
+	if (start >= ft_strlen(s))
 	{
-		korean_presort(&a, &b);
-		sort_3_left(&a);
-		sort_stack(&a, &b);
+		ret = ft_calloc(1, sizeof(char));
+		if (!ret)
+			return (0);
+		return (ret);
 	}
-	clean_exit(a, b, 0);
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
+	ret = ft_calloc(len + 1, sizeof(char));
+	if (!ret)
+		return (0);
+	while (i < len)
+	{
+		ret[i] = s[start + i];
+		i++;
+	}
+	ret[i] = 0;
+	return (ret);
 }

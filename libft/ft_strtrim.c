@@ -1,35 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuffard <mjuffard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/14 06:16:38 by mjuffard          #+#    #+#             */
-/*   Updated: 2024/01/14 23:26:01 by mjuffard         ###   ########lyon.fr   */
+/*   Created: 2023/11/09 16:48:24 by mjuffard          #+#    #+#             */
+/*   Updated: 2023/11/14 23:17:04 by mjuffard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "push_swap.h"
 
-int	main(int argc, char **argv)
+int	ft_found(char const c, char const *sep)
 {
-	t_stack	*a;
-	t_stack	*b;
+	size_t	i;
 
-	a = create_stack(argv, argc - 1);
-	b = NULL;
-	if (!a)
-		return (0);
-	final_index(a);
-	if (!check_double(a))
-		clean_exit(a, b, 1);
-	if (!check_order(a))
+	i = 0;
+	while (sep[i])
 	{
-		korean_presort(&a, &b);
-		sort_3_left(&a);
-		sort_stack(&a, &b);
+		if (sep[i] == c)
+			return (1);
+		i++;
 	}
-	clean_exit(a, b, 0);
+	return (0);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	size_t	i;
+	size_t	j;
+	char	*str;
+
+	if (!s1)
+		return (0);
+	i = 0;
+	j = ft_strlen(s1);
+	while (ft_found(s1[i], set))
+		i++;
+	while (j && ft_found(s1[j - 1], set))
+		j--;
+	str = ft_substr(s1, i, j - i);
+	return (str);
 }

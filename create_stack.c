@@ -6,7 +6,7 @@
 /*   By: mjuffard <mjuffard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 08:39:31 by mjuffard          #+#    #+#             */
-/*   Updated: 2024/05/01 05:13:02 by mjuffard         ###   ########lyon.fr   */
+/*   Updated: 2024/01/25 16:29:49 by mjuffard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,10 @@
 static t_stack	*new_elem(int content)
 {
 	t_stack	*new_elem;
-	static int	i = 0;
 
-	if (i++ < 5)
-		new_elem = malloc(sizeof(t_stack) * 1);
-	else
-		new_elem = NULL;
+	new_elem = malloc(sizeof(t_stack) * 1);
 	if (!new_elem)
-		return (NULL);
+		return (0);
 	new_elem->content = content;
 	new_elem->final_i = 0;
 	new_elem->next = new_elem;
@@ -87,7 +83,6 @@ static int	create_number(char *arg, t_stack *stack, char **tab)
 t_stack	*create_stack(char **arg, int size)
 {
 	t_stack	*stack;
-	t_stack	*new_elem;
 	char	**tab;
 	int		i;
 
@@ -100,10 +95,7 @@ t_stack	*create_stack(char **arg, int size)
 		i = tab_len(tab);
 		while (i-- > 0)
 		{
-			new_elem = new_elem(create_number(tab[i], stack, tab));
-			if (!new_elem)
-				return (NULL);
-			add_new_elem(&stack, new_elem);
+			add_new_elem(&stack, new_elem(create_number(tab[i], stack, tab)));
 			free(tab[i]);
 		}
 		free(tab);

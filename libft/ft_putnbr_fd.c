@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuffard <mjuffard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/14 06:16:38 by mjuffard          #+#    #+#             */
-/*   Updated: 2024/01/14 23:26:01 by mjuffard         ###   ########lyon.fr   */
+/*   Created: 2023/11/13 19:49:30 by mjuffard          #+#    #+#             */
+/*   Updated: 2023/11/13 20:26:45 by mjuffard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	ft_putnbr_fd(int n, int fd)
 {
-	t_stack	*a;
-	t_stack	*b;
+	char	temp;
 
-	a = create_stack(argv, argc - 1);
-	b = NULL;
-	if (!a)
-		return (0);
-	final_index(a);
-	if (!check_double(a))
-		clean_exit(a, b, 1);
-	if (!check_order(a))
+	if (n == INT_MIN)
 	{
-		korean_presort(&a, &b);
-		sort_3_left(&a);
-		sort_stack(&a, &b);
+		write(fd, "-2147483648", 11);
+		return ;
 	}
-	clean_exit(a, b, 0);
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		n = -n;
+	}
+	temp = n % 10 + '0';
+	if (n > 9)
+	{
+		n = n / 10;
+		ft_putnbr_fd(n, fd);
+	}
+	write(fd, &temp, 1);
 }

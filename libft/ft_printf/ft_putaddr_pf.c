@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_putaddr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuffard <mjuffard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/14 06:16:38 by mjuffard          #+#    #+#             */
-/*   Updated: 2024/01/14 23:26:01 by mjuffard         ###   ########lyon.fr   */
+/*   Created: 2023/11/27 23:26:55 by mjuffard          #+#    #+#             */
+/*   Updated: 2023/11/30 12:12:22 by mjuffard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "push_swap.h"
+#include "ft_printf.h"
 
-int	main(int argc, char **argv)
+int	ft_putaddr(size_t n, char *base, int *count)
 {
-	t_stack	*a;
-	t_stack	*b;
+	char		temp;
 
-	a = create_stack(argv, argc - 1);
-	b = NULL;
-	if (!a)
-		return (0);
-	final_index(a);
-	if (!check_double(a))
-		clean_exit(a, b, 1);
-	if (!check_order(a))
+	if (!n)
+		return (ft_putstr("(nil)"));
+	if (*count == 0)
+		if (ft_putstr("0x") == -1)
+			return (-1);
+	(*count)++;
+	temp = n % ft_strlen(base);
+	if (n >= ft_strlen(base))
 	{
-		korean_presort(&a, &b);
-		sort_3_left(&a);
-		sort_stack(&a, &b);
+		n = n / ft_strlen(base);
+		ft_putaddr(n, base, count);
 	}
-	clean_exit(a, b, 0);
+	if (write(1, base + temp, 1) == -1)
+		return (-1);
+	return (*count + 2);
 }

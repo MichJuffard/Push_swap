@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuffard <mjuffard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/14 06:16:38 by mjuffard          #+#    #+#             */
-/*   Updated: 2024/01/14 23:26:01 by mjuffard         ###   ########lyon.fr   */
+/*   Created: 2023/11/13 18:42:38 by mjuffard          #+#    #+#             */
+/*   Updated: 2023/11/14 23:14:57 by mjuffard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "push_swap.h"
 
-int	main(int argc, char **argv)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	t_stack	*a;
-	t_stack	*b;
+	size_t	i;
+	char	*str;
 
-	a = create_stack(argv, argc - 1);
-	b = NULL;
-	if (!a)
+	if (!s || !f)
+		return (NULL);
+	i = 0;
+	str = ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!str)
 		return (0);
-	final_index(a);
-	if (!check_double(a))
-		clean_exit(a, b, 1);
-	if (!check_order(a))
+	while (s[i])
 	{
-		korean_presort(&a, &b);
-		sort_3_left(&a);
-		sort_stack(&a, &b);
+		str[i] = (*f)(i, s[i]);
+		i++;
 	}
-	clean_exit(a, b, 0);
+	return (str);
 }
