@@ -37,6 +37,22 @@ optimized data sorting.
 make push_swap
 ```
 
+## 🧮 Sorting Algorithm
+
+Push Swap employs a sorting algorithm that combines elements of insertion sort and selection sort techniques. The algorithm operates on two stacks, A and B, and proceeds through several phases to sort the elements efficiently.
+
+### Presort Phase
+
+The sorting begins with the Presort phase, where each element in stack A is indexed. The algorithm then applies a heuristic calculation based on the length of the stack to determine the optimal number of iterations for sorting.
+
+### Sort 3 bigger
+
+When 3 biggers elements left in stack A we sort them with the differents possibility.
+
+### Sorting Phase
+
+After the Presort phase, the algorithm proceeds to the sorting phase. Here, elements are moved from stack B to stack A. If the bottom of stack A was smaller than top of stack B we PA and RA else we push the bigger index left in stack B. Then we check if the bottom A was the next one for RRA.
+
 ## 🧑🏻‍💻 Usage
 
 Use the Makefile for compile the project then execute the program with numeric integer argument. The program will display in the stdout a list of action for sort the list.
