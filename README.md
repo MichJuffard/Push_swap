@@ -11,19 +11,19 @@ optimized data sorting.
 
 > Shift up all elements of stack A (RA), B (RB) or both (RR) by 1. The first element becomes the last one.
 
->  Example: If stack A contains [3, 2, 1], the RA instruction will transform it into [2, 1, 3].
+> Example: If stack A contains [3, 2, 1], the RA instruction will transform it into [2, 1, 3].
 
 - RRA | RRB | RRR
 
 > Shift down all elements of stack A (RRA), B (RRB) or both (RRR) by 1. The last element becomes the first one.
 
->  Example: If stack A contains [3, 2, 1], the RRA instruction will transform it into [1, 3, 2].
+> Example: If stack A contains [3, 2, 1], the RRA instruction will transform it into [1, 3, 2].
 
 - SA | SB | SS
 
 > Swap the first 2 elements at the top of stack A (SA), B (SB) or both (SS) .Do nothing if there is only one or no elements.
 
->  Example: If stack A contains [3, 2, 1], the SA instruction will transform it into [2, 3, 1].
+> Example: If stack A contains [3, 2, 1], the SA instruction will transform it into [2, 3, 1].
 
 - PA | PB
 
